@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8">
+	<title>Home</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" >
+</head>
+<body>
+	<nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+	<div class="navbar-header">
+		<a class="navbar-brand active" href="/home">Biblioteka</a>
+	</div>
+		<div class="collapse navbar-collapse" id="mainmenu">
+			<ul class="navbar-nav mr-auto">		
+				<li sec:authorize = "hasAnyRole('ADMIN','EMPLOYEE')" class="nav-item">
+					<a class="nav-link" href="/addBook">Dodaj Książkę</a>
+				</li>	
+				<li sec:authorize = "hasAnyRole('ADMIN','EMPLOYEE','USER')" class="nav-item">
+				 	<a class="nav-link" href="/borrow">Rezerwacja Książki</a>
+			 	</li>	
+				 <li sec:authorize = "hasAnyRole('ADMIN','EMPLOYEE')" class="nav-item">
+				 	<a class="nav-link" href="/release">Wydanie Książki</a>
+			 	</li>	
+				<li sec:authorize = "hasAnyRole('ADMIN','EMPLOYEE')" class="nav-item">
+					<a class="nav-link" href="/giveBack">Przyjmij</a>
+				</li>
+				<li sec:authorize = "hasAnyRole('ADMIN','EMPLOYEE','USER')" class="nav-item">
+				 	<a class="nav-link" href="/resignation">Rezygnacja</a>
+			 	</li>
+				<li class="nav-item">
+					<a class="nav-link"  th:href="@{/logout}">Wyloguj</a>
+				</li>
+			</ul>
+		</div>					
+	</nav>
+	<div class="main">
+		<div>	
+			<table class="table table-striped table-sm">
+				<thead>
+					<tr>
+						<th>Id wypożyczenia</th>
+						
+						<th>Imie</th>
+						<th>Nazwisko</th>
+						
+						<th>Tytuł książki</th>
+						<th>Autor książki</th>
+						<th>Data wypożyczenia</th>
+						<th>Data zwrotu</th>
+						<th>Status</th>
+						<th>Akcja</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr  th:each = "borrow  : ${borrows}">
+						<td th:text = "${borrow.id}"/>
+						
+						<td th:text = "${borrow.users.name}"/>
+						<td th:text = "${borrow.users.surname}"/>
+						
+						<td th:text = "${borrow.books.bookTitle}"/>
+						<td th:text = "${borrow.books.authorName + ' ' + borrow.books.authorSurname}"/>
+						<td th:text = "${borrow.dateBorrow}"/>
+						<td th:text = "${borrow.dateGiveBack}"/>
+						<td th:text = "${borrow.status}"/>
+						<td><a th:method = "post" th:href="@{/giveBacks(borrowId=${borrow.id})}" class="btn btn-info btn-sm">Zwrot</a></td>
+				</tbody>			
+			</table>
+		</div>
+	</div>
+</body>
+</html>

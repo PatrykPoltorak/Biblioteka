@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+	<title>Przychodnia</title>
+	<meta charset="UTF-8"/>	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+</head>
+<body>
+	<header>
+		<nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+			<a class="navbar-brand mr-5" href="/home">Przychodnia</a>
+				<div class="collapse navbar-collapse" id="mainmenu">
+					<ul class="navbar-nav mr-auto">		
+						
+						<li class="nav-item">
+							<a class="nav-link"  th:href="@{/logout}">Wyloguj</a>
+						</li>
+					</ul>
+				</div>					
+			</nav>
+	</header>
+<h1>Dostęp zabroniony</h1>
+</body>
+</html>

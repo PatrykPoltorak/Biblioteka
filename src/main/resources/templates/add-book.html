@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8">
+<title>Dodaj nową książkę</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+</head>
+<body>
+	<nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+	<div class="navbar-header">
+		<a class="navbar-brand active" href="/home">Biblioteka</a>
+	</div>
+		<div class="collapse navbar-collapse" id="mainmenu">
+			<ul class="navbar-nav mr-auto">		
+				<li sec:authorize = "hasAnyRole('ADMIN','EMPLOYEE')" class="nav-item">
+					<a class="nav-link" href="/addBook">Dodaj Książkę</a>
+				</li>	
+				<li sec:authorize = "hasAnyRole('ADMIN','EMPLOYEE')" class="nav-item">
+				 	<a class="nav-link" href="/home">Rezerwacja Książki</a>
+			 	</li>	
+				 <li sec:authorize = "hasAnyRole('ADMIN','EMPLOYEE')" class="nav-item">
+				 	<a class="nav-link" href="/home">Wydanie Książki</a>
+			 	</li>	
+				<li sec:authorize = "hasAnyRole('ADMIN','EMPLOYEE')" class="nav-item">
+					<a class="nav-link" href="/home">Przyjmij</a>
+				</li>
+				<li sec:authorize = "hasAnyRole('ADMIN','EMPLOYEE','USER')" class="nav-item">
+				 	<a class="nav-link" href="/home">Rezygnacja</a>
+			 	</li>
+				<li class="nav-item">
+					<a class="nav-link"  th:href="@{/logout}">Wyloguj</a>
+				</li>
+			</ul>
+		</div>					
+	</nav>
+	<div>
+		<form action="#" th:action="@{/addBook}" th:object="${book}"  method="post">	
+			<div>
+				Imię autora
+				<input type="text" th:field = "*{authorName}" class="form-control mb-4 col-4" />
+				<div th:if="${registrationError}" class="alert alert-danger col-xs-offset-1 col-xs-10">
+							<span th:text="${registrationError}"></span>
+				</div>
+			</div>
+			<div>
+				Nazisko autora	
+				<input type="text" th:field = "*{authorSurname}" class="form-control mb-4 col-4"/>
+				<div th:if="${#fields.hasErrors('authorSurname')}" th:errors="*{authorSurname}" class="alert alert-danger col-xs-offset-1 col-xs-10"></div>
+			</div>
+			<div th:if="${error}" class="alert alert-danger col-xs-offset-1 col-xs-10"></div>
+			<div>				
+				Tytuł książki
+				<input type="text" th:field = "*{bookTitle}" class="form-control mb-4 col-4"/>
+				<div th:if="${#fields.hasErrors('bookTitle')}" th:errors="*{bookTitle}" class="alert alert-danger col-xs-offset-1 col-xs-10"></div>
+			</div>
+			<div>
+				Data wydania
+				<input type="date" th:field = "*{releaseDate}" class="form-control mb-4 col-4"/>
+				<div th:if="${#fields.hasErrors('releaseDate')}" th:errors="*{releaseDate}" class="alert alert-danger col-xs-offset-1 col-xs-10"></div>
+			</div>
+			<br>
+			<input type = "submit" value = "Zapisz" class="btn btn-info col-2"/>															
+		</form>	
+	</div>
+</body>
+</html>
