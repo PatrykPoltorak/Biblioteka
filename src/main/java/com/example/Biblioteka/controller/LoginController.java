@@ -4,12 +4,16 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.Biblioteka.entity.User;
@@ -27,6 +31,11 @@ public class LoginController {
 		this.userRepository = userRepository;
 		this.userService = userService;
 		this.roleRepository = roleRepository;
+	}
+	@InitBinder
+	public void initBinder(WebDataBinder dataBinder){
+		StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
+		dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
 	}
 	@GetMapping("/login")
 	public String login() {
@@ -49,16 +58,22 @@ public class LoginController {
 		return "registration";
 	}
 	@PostMapping("/registration")
-	public String registration(@ModelAttribute User user) {
-		List<User> tmp = userRepository.findAll();
-		for (User users : tmp) {
-			String username = users.getUsername();
-			if(user.getUsername().equals(username)) {
-				System.out.println("już istnieje");
-				return"registration";
+	public String registration(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
+		if(bindingResult.hasErrors()){
+			return "registration";
+		}else{
+			List<User> tmp = userRepository.findAll();
+			for (User users : tmp) {
+				String username = users.getUsername();
+				if(user.getUsername().equals(username)) {
+					System.out.println("już istnieje");
+					return"registration";
+				}
 			}
+			userService.add(user);
+			return "redirect:/login";
+
 		}
-		userService.add(user);
-		return "redirect:/login";
+
 	}	
 }

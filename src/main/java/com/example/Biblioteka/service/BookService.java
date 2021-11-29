@@ -16,8 +16,7 @@ public class BookService implements BookInterface{
 		this.bookRepository = bookRepository;
 	}
 	@Override
-	public void add(Book book) {	
-		book.setStatus("Dostępna");
+	public void add(Book book) {
 		bookRepository.save(book);
 	}
 	public boolean exists(Book book){

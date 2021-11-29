@@ -1,6 +1,7 @@
 package com.example.Biblioteka.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.sql.Date;
 @Entity
@@ -9,10 +10,12 @@ public class Book {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String authorName;
+	@NotNull(message = "pole wymagane")
 	private String authorSurname;
+	@NotNull(message = "pole wymagane")
 	private String bookTitle;
+	@NotNull(message = "pole wymagane")
 	private Date releaseDate;
-	private String status;
 	@OneToMany(mappedBy = "books", cascade = CascadeType.REMOVE)
 	private List<Borrow>  borrowsbook;
 	public int getId() {
@@ -45,12 +48,7 @@ public class Book {
 	public void setReleaseDate(Date releaseDate) {
 		this.releaseDate = releaseDate;
 	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
+
 	public List<Borrow> getBorrowsbook() {
 		return borrowsbook;
 	}
@@ -60,7 +58,7 @@ public class Book {
 	@Override
 	public String toString() {
 		return "Book [id=" + id + ", authorName=" + authorName + ", authorSurname=" + authorSurname + ", bookTitle="
-				+ bookTitle + ", releaseDate=" + releaseDate + ", status=" + status + "]";
+				+ bookTitle + ", releaseDate=" + releaseDate + ", status=" + "]";
 	}
 	
 

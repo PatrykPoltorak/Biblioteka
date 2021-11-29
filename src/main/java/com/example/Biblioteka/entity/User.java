@@ -1,5 +1,7 @@
 package com.example.Biblioteka.entity;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import java.util.*;
 @Entity
@@ -8,9 +10,16 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	@Size(min = 1)
+	@NotNull(message = "pole wymagane")
 	private String username;
+	@Size(min = 5, message = "hasło musi zawierać minimum 5 znaków")
+	@NotNull(message = "pole wymagane")
 	private String password;
+	@NotNull(message = "pole wymagane")
 	private String name;
+
+	@NotNull(message = "pole wymagane")
 	private String surname;
 	@OneToMany(mappedBy = "users", cascade = CascadeType.REMOVE)
 	private List<Borrow>  borrowsUser;

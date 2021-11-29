@@ -43,17 +43,21 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 	                 <div class="col-md-6">
 	                     <div class="form-group">
 	                         <input type="text" th:field="*{username}" class="form-control" placeholder="Login *" value=""/>
+							 <p th:if="${#fields.hasErrors('username')}" th:errorclass="error" th:errors="*{username}" />
 	                     </div>
 	                     <div class="form-group">
 	                         <input type="text" th:field="*{password}"class="form-control" placeholder="Hasło *" value=""/>
+							 <p th:if="${#fields.hasErrors('password')}" th:errorclass="error" th:errors="*{password}" />
 	                     </div>
 	                 </div>
 	                 <div class="col-md-6">
 	                     <div class="form-group">
 	                         <input type="text" th:field="*{name}"class="form-control" placeholder="Imie" value=""/>
+							 <p th:if="${#fields.hasErrors('name')}" th:errorclass="error" th:errors="*{name}" />
 	                     </div>
 	                     <div class="form-group">
 	                         <input type="text" th:field="*{surname}"class="form-control" placeholder="Nazwisko" value=""/>
+							 <p th:if="${#fields.hasErrors('surname')}" th:errorclass="error" th:errors="*{surname}" />
 	                     </div>
 	                 </div> 	
 	       			</div>  
