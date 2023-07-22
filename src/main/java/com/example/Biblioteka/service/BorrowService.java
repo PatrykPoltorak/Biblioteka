@@ -1,7 +1,10 @@
 package com.example.Biblioteka.service;
 
 import java.util.Date;
+import java.util.List;
 
+import com.example.Biblioteka.entity.Users;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -11,19 +14,31 @@ import com.example.Biblioteka.repository.BorrowRepository;
 import com.example.Biblioteka.repository.UserRepository;
 import com.example.Biblioteka.service.serviceInterface.BorrowInterface;
 @Service
+@AllArgsConstructor
 public class BorrowService implements BorrowInterface{
 	private BorrowRepository  borrowRepository;
 	private BookRepository bookRepository;
 	private UserRepository userRepository;
-	
-	public BorrowService(BorrowRepository borrowRepository, BookRepository bookRepository,
-			UserRepository userRepository) {
-		super();
-		this.borrowRepository = borrowRepository;
-		this.bookRepository = bookRepository;
-		this.userRepository = userRepository;
+
+	public Users findUserBySurname(String surname){
+		return userRepository.findUserBySurname(surname);
+	}
+	public List<Borrow> findBorrowForUser(int id){
+		return borrowRepository.findBorrowForUser(id);
+	}
+	public List<Borrow> findAll(){
+		return borrowRepository.findAll();
+	}
+	public List<Borrow> findBorrowByReleaseStatus(){
+		return borrowRepository.findBorrowByStatus("Zarezerwowana");
+	}
+	public List<Borrow> findBorrowByGiveBackStatus(){
+		return borrowRepository.findBorrowByStatus("Wydana");
 	}
 
+	public Borrow findById(int borrowId){
+		return borrowRepository.findBorrowById(borrowId);
+	}
 	@Override
 	public void reservation(int bookId, UserDetails customUser) {
 		Borrow borrow = new Borrow();

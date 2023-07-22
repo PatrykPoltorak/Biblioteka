@@ -1,8 +1,9 @@
-package com.example.Biblioteka.service;
+package com.example.Biblioteka.service.Book;
 
 import java.util.Date;
 import java.util.List;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import com.example.Biblioteka.entity.Book;
@@ -10,10 +11,12 @@ import com.example.Biblioteka.repository.BookRepository;
 import com.example.Biblioteka.service.serviceInterface.BookInterface;
 
 @Service
+@AllArgsConstructor
 public class BookService implements BookInterface{
 	private BookRepository bookRepository;
-	public BookService(BookRepository bookRepository) {
-		this.bookRepository = bookRepository;
+
+	public List<Book> findAll(){
+		return bookRepository.findAll();
 	}
 	@Override
 	public void add(Book book) {
