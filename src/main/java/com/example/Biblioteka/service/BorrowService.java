@@ -6,7 +6,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.example.Biblioteka.entity.Borrow;
-import com.example.Biblioteka.entity.User;
 import com.example.Biblioteka.repository.BookRepository;
 import com.example.Biblioteka.repository.BorrowRepository;
 import com.example.Biblioteka.repository.UserRepository;

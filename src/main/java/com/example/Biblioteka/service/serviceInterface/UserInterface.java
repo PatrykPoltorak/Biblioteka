@@ -1,8 +1,8 @@
 package com.example.Biblioteka.service.serviceInterface;
 
-import com.example.Biblioteka.entity.User;
+import com.example.Biblioteka.entity.Users;
 
 public interface UserInterface {
-	void add(User user);
-	void edit(User user);
+	void add(Users user);
+	void edit(Users user);
 }

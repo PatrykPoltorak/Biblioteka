@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,22 +17,18 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.Biblioteka.entity.User;
+import com.example.Biblioteka.entity.Users;
 import com.example.Biblioteka.repository.RoleRepository;
 import com.example.Biblioteka.repository.UserRepository;
 import com.example.Biblioteka.service.*;
 
 @Controller
+@AllArgsConstructor
 public class LoginController {
 	private UserRepository userRepository;
 	private UserService userService;
 	private RoleRepository roleRepository;
-	
-	public LoginController(UserRepository userRepository, UserService userService,RoleRepository roleRepository) {
-		this.userRepository = userRepository;
-		this.userService = userService;
-		this.roleRepository = roleRepository;
-	}
+
 	@InitBinder
 	public void initBinder(WebDataBinder dataBinder){
 		StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
@@ -52,18 +49,18 @@ public class LoginController {
     }
 	@GetMapping("/registration")
 	public String registration(Model model) {
-		model.addAttribute("user", new User());
+		model.addAttribute("user", new Users());
 		model.addAttribute("users",roleRepository.findRoleByname("ROLE_USER"));
 		model.addAttribute("admin",roleRepository.findAll());
 		return "registration";
 	}
 	@PostMapping("/registration")
-	public String registration(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
+	public String registration(@Valid @ModelAttribute("user") Users user, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()){
 			return "registration";
 		}else{
-			List<User> tmp = userRepository.findAll();
-			for (User users : tmp) {
+			List<Users> tmp = userRepository.findAll();
+			for (Users users : tmp) {
 				String username = users.getUsername();
 				if(user.getUsername().equals(username)) {
 					System.out.println("już istnieje");

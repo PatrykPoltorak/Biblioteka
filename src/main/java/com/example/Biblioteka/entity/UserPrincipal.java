@@ -8,15 +8,15 @@ import org.springframework.security.core.userdetails.User;
 @SuppressWarnings("serial")
 public class UserPrincipal extends User{
 	
-	private final  com.example.Biblioteka.entity.User user;
+	private final Users user;
 	
 	public UserPrincipal(String username, String password,
-			Collection<? extends GrantedAuthority> authorities, com.example.Biblioteka.entity.User users) {
+			Collection<? extends GrantedAuthority> authorities, Users users) {
 		super(username, password, authorities);
 		this.user = users;
 	}
 	
-	public com.example.Biblioteka.entity.User getUsers() {
+	public Users getUsers() {
 		return user;
 	}
 }

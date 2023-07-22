@@ -22,7 +22,7 @@ public class UserService implements UserInterface {
 	}
 
 	@Override
-	public void add(User user) {
+	public void add(Users user) {
 		Set<Role> roles = new HashSet<>();
 		roles.add(roleRepository.findRoleByname("ROLE_USER"));
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -31,10 +31,10 @@ public class UserService implements UserInterface {
 	}
 
 	@Override
-	public void edit(User user) {
+	public void edit(Users user) {
 		userRepository.save(user);		
 	}
-	public User findByUsername(String name) {		
+	public Users findByUsername(String name) {
 		return userRepository.findUserByUsername(name);
 	}
 

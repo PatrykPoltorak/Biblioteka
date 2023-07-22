@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.example.Biblioteka.entity.UserPrincipal;
-import com.example.Biblioteka.entity.User;
+import com.example.Biblioteka.entity.Users;
 
 public class MyUserDetailsServiceImpl implements UserDetailsService {
 
@@ -22,7 +22,7 @@ public class MyUserDetailsServiceImpl implements UserDetailsService {
 	}	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User users = userService.findByUsername(username);
+		Users users = userService.findByUsername(username);
 		
 		Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 		
