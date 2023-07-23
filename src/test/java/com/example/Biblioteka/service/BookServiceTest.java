@@ -1,5 +1,5 @@
 package com.example.Biblioteka.service;
-import org.aspectj.lang.annotation.Before;
+
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -7,19 +7,13 @@ import com.example.Biblioteka.entity.Book;
 import com.example.Biblioteka.entity.Borrow;
 import com.example.Biblioteka.repository.BookRepository;
 import com.example.Biblioteka.service.Book.BookService;
-import lombok.AllArgsConstructor;
-import org.mockito.Mock;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.TestPropertySource;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @TestPropertySource("/application-test.properties")

@@ -59,20 +59,13 @@ public class LoginController {
 	public String registration(@Valid @ModelAttribute("user") Users user, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()){
 			return "registration";
+		}else if(userService.userExists(user.getUsername())){
+			System.out.println("już istnieje");
+			return"registration";
 		}else{
-
-			List<Users> tmp = userService.findAll();
-			for (Users users : tmp) {
-				var username = users.getUsername();
-				if(user.getUsername().equals(username)) {
-					System.out.println("już istnieje");
-					return"registration";
-				}
-			}
 			userService.add(user);
 			return "redirect:/login";
-
 		}
-
-	}	
+	}
 }
+

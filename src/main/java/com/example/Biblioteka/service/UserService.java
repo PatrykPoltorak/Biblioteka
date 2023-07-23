@@ -1,5 +1,6 @@
 package com.example.Biblioteka.service;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -10,17 +11,11 @@ import com.example.Biblioteka.repository.RoleRepository;
 import com.example.Biblioteka.repository.UserRepository;
 import com.example.Biblioteka.service.serviceInterface.UserInterface;
 @Service
+@AllArgsConstructor
 public class UserService implements UserInterface {
 	private final UserRepository userRepository;
 	private final RoleRepository roleRepository;
 	private final BCryptPasswordEncoder passwordEncoder;
-	
-	public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder, RoleRepository roleRepository) {
-		super();
-		this.userRepository = userRepository;
-		this.passwordEncoder = passwordEncoder;
-		this.roleRepository = roleRepository;
-	}
 
 	@Override
 	public void add(Users user) {
@@ -31,9 +26,18 @@ public class UserService implements UserInterface {
 		userRepository.save(user);
 	}
 
+	public boolean userExists(String users){
+		for(Users user: userRepository.findAll()){
+			if(users.equals(user.getUsername())){
+				return true;
+			}
+		}
+		return false;
+	}
+
 	@Override
 	public void edit(Users user) {
-		userRepository.save(user);		
+		userRepository.save(user);
 	}
 	public Users findByUsername(String name) {
 		return userRepository.findUserByUsername(name);
