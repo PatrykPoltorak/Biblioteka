@@ -1,6 +1,7 @@
 package com.example.Biblioteka.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -59,9 +60,10 @@ public class LoginController {
 		if(bindingResult.hasErrors()){
 			return "registration";
 		}else{
-			List<Users> tmp = userRepository.findAll();
+
+			List<Users> tmp = userService.findAll();
 			for (Users users : tmp) {
-				String username = users.getUsername();
+				var username = users.getUsername();
 				if(user.getUsername().equals(username)) {
 					System.out.println("już istnieje");
 					return"registration";

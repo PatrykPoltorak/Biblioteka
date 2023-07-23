@@ -1,5 +1,6 @@
 package com.example.Biblioteka.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.*;
@@ -10,8 +11,8 @@ import com.example.Biblioteka.repository.UserRepository;
 import com.example.Biblioteka.service.serviceInterface.UserInterface;
 @Service
 public class UserService implements UserInterface {
-	private UserRepository userRepository;
-	private RoleRepository roleRepository;
+	private final UserRepository userRepository;
+	private final RoleRepository roleRepository;
 	private final BCryptPasswordEncoder passwordEncoder;
 	
 	public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder, RoleRepository roleRepository) {
@@ -36,6 +37,9 @@ public class UserService implements UserInterface {
 	}
 	public Users findByUsername(String name) {
 		return userRepository.findUserByUsername(name);
+	}
+	public List<Users> findAll(){
+		return userRepository.findAll();
 	}
 
 

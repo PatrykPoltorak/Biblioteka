@@ -5,7 +5,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
 
-@SuppressWarnings("serial")
 public class UserPrincipal extends User{
 	
 	private final Users user;

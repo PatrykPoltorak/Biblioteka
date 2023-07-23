@@ -4,11 +4,13 @@ import java.util.Date;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import com.example.Biblioteka.entity.Book;
 import com.example.Biblioteka.repository.BookRepository;
 import com.example.Biblioteka.service.serviceInterface.BookInterface;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @AllArgsConstructor
@@ -18,10 +20,16 @@ public class BookService implements BookInterface{
 	public List<Book> findAll(){
 		return bookRepository.findAll();
 	}
+
+	public Book findBookById(int id){
+		return bookRepository.findBookById(id);
+	}
 	@Override
+
 	public void add(Book book) {
 		bookRepository.save(book);
 	}
+
 	public boolean exists(Book book){
 		List<Book> book2 = bookRepository.findBookByTitle(book.getBookTitle());
 		if(!book2.isEmpty()){
@@ -35,7 +43,7 @@ public class BookService implements BookInterface{
 	}
 	@Override
 	public void delate(int bookId) {
-		bookRepository.delete(bookRepository.findBookById(bookId));
+		bookRepository.deleteById(bookId);
 	}
 
 }

@@ -13,6 +13,8 @@ import com.example.Biblioteka.repository.BookRepository;
 import com.example.Biblioteka.repository.BorrowRepository;
 import com.example.Biblioteka.repository.UserRepository;
 import com.example.Biblioteka.service.serviceInterface.BorrowInterface;
+import org.springframework.transaction.annotation.Transactional;
+
 @Service
 @AllArgsConstructor
 public class BorrowService implements BorrowInterface{
@@ -51,6 +53,7 @@ public class BorrowService implements BorrowInterface{
 	}
 
 	@Override
+	@Transactional
 	public void accept(Borrow borrow) {			
 		borrow.setDateBorrow(new Date());
 		borrow.setStatus("Wydana");

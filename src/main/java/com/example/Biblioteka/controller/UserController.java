@@ -16,15 +16,12 @@ import com.example.Biblioteka.service.*;
 @AllArgsConstructor
 @RequestMapping("/user")
 public class UserController {
-	private UserRepository userRepository;
-	private BookRepository bookRepository;
-	private BorrowRepository borrowRepository;
 	private BorrowService borrowService;
-	private Users user;
+
 
 	@GetMapping("")
 	public String home(Model model) {
-		model.addAttribute("borrows", borrowRepository.findAll());	
+		model.addAttribute("borrows", borrowService.findAll());
 		return "home";
 	}
 	
