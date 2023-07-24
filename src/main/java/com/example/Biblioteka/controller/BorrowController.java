@@ -1,22 +1,20 @@
 package com.example.Biblioteka.controller;
 
-import java.security.Principal;
 import java.util.List;
 import java.util.Set;
 
-import com.example.Biblioteka.service.UserService;
+import com.example.Biblioteka.service.Users.UserServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.Biblioteka.entity.*;
 import com.example.Biblioteka.repository.*;
-import com.example.Biblioteka.service.BorrowService;
+import com.example.Biblioteka.service.Borrow.BorrowService;
 @Controller
 @AllArgsConstructor
 public class BorrowController {
@@ -27,7 +25,7 @@ public class BorrowController {
 	private BorrowService borrowService;
 	private RoleRepository roleRepository;
 
-	private UserService userService;
+	private UserServiceImpl userService;
 
 	@GetMapping("/home")
 	public String home(Model model, @AuthenticationPrincipal UserDetails customUser) {

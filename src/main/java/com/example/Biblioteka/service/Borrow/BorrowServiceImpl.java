@@ -1,4 +1,4 @@
-package com.example.Biblioteka.service;
+package com.example.Biblioteka.service.Borrow;
 
 import java.util.Date;
 import java.util.List;
@@ -12,12 +12,11 @@ import com.example.Biblioteka.entity.Borrow;
 import com.example.Biblioteka.repository.BookRepository;
 import com.example.Biblioteka.repository.BorrowRepository;
 import com.example.Biblioteka.repository.UserRepository;
-import com.example.Biblioteka.service.serviceInterface.BorrowInterface;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @AllArgsConstructor
-public class BorrowService implements BorrowInterface{
+public class BorrowServiceImpl implements BorrowService {
 	private BorrowRepository  borrowRepository;
 	private BookRepository bookRepository;
 	private UserRepository userRepository;

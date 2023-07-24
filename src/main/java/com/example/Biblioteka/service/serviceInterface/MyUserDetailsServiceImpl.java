@@ -1,8 +1,9 @@
-package com.example.Biblioteka.service;
+package com.example.Biblioteka.service.serviceInterface;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import com.example.Biblioteka.service.Users.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,9 +16,9 @@ import com.example.Biblioteka.entity.Users;
 
 public class MyUserDetailsServiceImpl implements UserDetailsService {
 
-	private UserService userService;	
+	private UserServiceImpl userService;
 	@Autowired
-	public void setUsersRepository(UserService usersService) {
+	public void setUsersRepository(UserServiceImpl usersService) {
 		this.userService = usersService;
 	}	
 	@Override

@@ -1,12 +1,10 @@
 package com.example.Biblioteka.controller;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import com.example.Biblioteka.service.Users.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.security.core.Authentication;
@@ -21,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 import com.example.Biblioteka.entity.Users;
 import com.example.Biblioteka.repository.RoleRepository;
 import com.example.Biblioteka.repository.UserRepository;
-import com.example.Biblioteka.service.*;
 
 @Controller
 @AllArgsConstructor

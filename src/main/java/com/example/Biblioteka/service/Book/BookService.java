@@ -1,49 +1,14 @@
 package com.example.Biblioteka.service.Book;
 
-import java.util.Date;
+import com.example.Biblioteka.entity.Book;
+
 import java.util.List;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Service;
-
-import com.example.Biblioteka.entity.Book;
-import com.example.Biblioteka.repository.BookRepository;
-import com.example.Biblioteka.service.serviceInterface.BookInterface;
-import org.springframework.transaction.annotation.Transactional;
-
-@Service
-@AllArgsConstructor
-public class BookService implements BookInterface{
-	private BookRepository bookRepository;
-
-	public List<Book> findAll(){
-		return bookRepository.findAll();
-	}
-
-	public Book findBookById(int id){
-		return bookRepository.findBookById(id);
-	}
-	@Override
-
-	public void add(Book book) {
-		bookRepository.save(book);
-	}
-
-	public boolean exists(Book book){
-		List<Book> book2 = bookRepository.findBookByTitle(book.getBookTitle());
-		if(!book2.isEmpty()){
-			for (Book book3 : book2) {
-				if(book.getAuthorSurname().equals(book3.getAuthorSurname())) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-	@Override
-	public void delate(int bookId) {
-		bookRepository.deleteById(bookId);
-	}
+public interface BookService {
+	void add(Book book);
+	void delate(int bookId);
+	List<Book> findAll();
+	Book findBookById(int id);
+	boolean exists(Book book);
 
 }

@@ -6,7 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.example.Biblioteka.entity.Book;
 import com.example.Biblioteka.entity.Borrow;
 import com.example.Biblioteka.repository.BookRepository;
-import com.example.Biblioteka.service.Book.BookService;
+import com.example.Biblioteka.service.Book.BookServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -31,7 +31,7 @@ public class BookServiceTest {
 
     private Book book;
     @Autowired
-    private BookService bookService;
+    private BookServiceImpl bookService;
 
 
     static private Book setBook() {

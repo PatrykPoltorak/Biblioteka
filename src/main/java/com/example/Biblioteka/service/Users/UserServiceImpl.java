@@ -1,7 +1,7 @@
-package com.example.Biblioteka.service;
+package com.example.Biblioteka.service.Users;
 
+import com.example.Biblioteka.service.Users.UserService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.*;
@@ -9,10 +9,10 @@ import java.util.*;
 import com.example.Biblioteka.entity.*;
 import com.example.Biblioteka.repository.RoleRepository;
 import com.example.Biblioteka.repository.UserRepository;
-import com.example.Biblioteka.service.serviceInterface.UserInterface;
+
 @Service
 @AllArgsConstructor
-public class UserService implements UserInterface {
+public class UserServiceImpl implements UserService {
 	private final UserRepository userRepository;
 	private final RoleRepository roleRepository;
 	private final BCryptPasswordEncoder passwordEncoder;

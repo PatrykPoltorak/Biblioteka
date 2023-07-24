@@ -1,5 +1,6 @@
 package com.example.Biblioteka.service;
 
+import com.example.Biblioteka.service.Users.UserServiceImpl;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.Test;
 import com.example.Biblioteka.entity.Users;
@@ -17,7 +18,7 @@ public class UsersServiceTest {
     private JdbcTemplate jdbc;
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
     @Value("${sql.script.create.users}")
     private String createUser;
     @Value("${sql.script.delete.users}")
