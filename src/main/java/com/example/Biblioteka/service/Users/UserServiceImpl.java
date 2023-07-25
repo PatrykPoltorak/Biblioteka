@@ -25,6 +25,7 @@ public class UserServiceImpl implements UserService {
 		user.setRoles(roles);
 		userRepository.save(user);
 	}
+	@Override
 
 	public boolean userExists(String users){
 		for(Users user: userRepository.findAll()){
@@ -39,13 +40,16 @@ public class UserServiceImpl implements UserService {
 	public void edit(Users user) {
 		userRepository.save(user);
 	}
+	@Override
 	public Users findByUsername(String name) {
 		return userRepository.findUserByUsername(name);
 	}
+	@Override
 	public List<Users> findAll(){
 		return userRepository.findAll();
 	}
-
-
-
+	@Override
+	public Users findUserBySurname(String surname){
+		return userRepository.findUserBySurname(surname);
+	}
 }

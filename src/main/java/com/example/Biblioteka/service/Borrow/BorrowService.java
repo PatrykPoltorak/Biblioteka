@@ -9,13 +9,14 @@ import java.util.List;
 public interface BorrowService {
 	void giveBack(int borrowId);
 	void cancel(int borrowId);
-	void accept(Borrow borrow);
+	void releaseBook(int borrowId);
 	void reservation(int bookId, UserDetails customUser);
 	List<Borrow> findBorrowForUser(int id);
 	List<Borrow> findAll();
 	List<Borrow> findBorrowByReleaseStatus();
 	List<Borrow> findBorrowByGiveBackStatus();
 	Borrow findById(int borrowId);
+	List<Borrow> findBorrowByStatus(String status);
 
 
 }

@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.Biblioteka.entity.*;
@@ -54,12 +55,13 @@ public class BorrowController {
 	}
 	@GetMapping("/resignation")
 	public String resignation(Model model, @AuthenticationPrincipal UserDetails customUser){
-		Set<Role> role =  (userRepository.findUserByUsername(customUser.getUsername())).getRoles();
+		var user = userService.findUserBySurname(customUser.getUsername());
+		Set<Role> role =  user.getRoles();
 		if(isItUserRole(role)) {
-			int id = userRepository.findUserByUsername(customUser.getUsername()).getId();
-			model.addAttribute("borrows", borrowRepository.findBorrowForUserStatus(id, "Zarezerwowana"));
+			var id = user.getId();
+			model.addAttribute("borrows", borrowRepository.findBorrowForUserStatus(id, String.valueOf(BorrowStatus.RESERVATION)));
 		}else {
-			model.addAttribute("borrows", borrowRepository.findBorrowByStatus("Zarezerwowana"));
+			model.addAttribute("borrows", borrowService.findBorrowByStatus("Zarezerwowana"));
 		}
 		
 		return "resignation";
@@ -75,9 +77,9 @@ public class BorrowController {
 		model.addAttribute("borrows", borrow);
 		return "release";
 	}
-	@GetMapping("/released")
+	@PutMapping("/released")
 	public String released(Model model, @RequestParam("borrowId") int borrowId) {
-		borrowService.accept(borrowService.findById(borrowId));
+		borrowService.releaseBook(borrowId);
 		return "redirect:/home";
 	}
 	@GetMapping("/giveBack")
@@ -85,7 +87,7 @@ public class BorrowController {
 		model.addAttribute("borrows", borrowService.findBorrowByGiveBackStatus());
 		return "giveBack";
 	}
-	@GetMapping("/giveBacks")
+	@PutMapping("/giveBacks")
 	public String giveBack(@RequestParam("borrowId") int borrowId) {
 		borrowService.giveBack(borrowId);
 		return "redirect:/home";
@@ -93,7 +95,7 @@ public class BorrowController {
 
 	public boolean isItUserRole(Set<Role> role)
 	{
-		return role.contains(roleRepository.findRoleByname("ROLE_USER"))? true : false;
+		return role.contains(roleRepository.findRoleByname("ROLE_USER"));
 	}
 	
 }

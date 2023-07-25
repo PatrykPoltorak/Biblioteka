@@ -53,7 +53,8 @@ public class BorrowServiceImpl implements BorrowService {
 
 	@Override
 	@Transactional
-	public void accept(Borrow borrow) {			
+	public void releaseBook(int borrowId) {
+		var borrow = borrowRepository.findBorrowById(borrowId);
 		borrow.setDateBorrow(new Date());
 		borrow.setStatus("Wydana");
 		borrowRepository.save(borrow);
@@ -74,6 +75,10 @@ public class BorrowServiceImpl implements BorrowService {
 		borrow.setDateGiveBack(new Date());
 		borrow.setStatus("Rezygnacja");
 		borrowRepository.save(borrow);
+	}
+
+	public List<Borrow> findBorrowByStatus(String status){
+		return borrowRepository.findBorrowByStatus(status);
 	}
 
 

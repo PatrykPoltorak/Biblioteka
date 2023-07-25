@@ -10,4 +10,5 @@ public interface UserService {
 	Users findByUsername(String name);
 	List<Users> findAll();
 	boolean userExists(String users);
+	Users findUserBySurname(String surname);
 }
