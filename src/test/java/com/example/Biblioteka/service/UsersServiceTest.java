@@ -30,18 +30,29 @@ public class UsersServiceTest {
     }
 
     @Test
-    private void userExist(){
+    public void userExist(){
         Users user = new Users();
         user.setUsername("username");
         Assertions.assertTrue(userService.userExists(user.getUsername()));
 
     }
     @Test
-    private void userNotExist(){
+    public void userNotExist(){
         Users user = new Users();
         user.setUsername("username1");
-        Assertions.assertTrue(userService.userExists(user.getUsername()));
+        Assertions.assertFalse(userService.userExists(user.getUsername()));
+    }
 
+    @Test
+    public void usersShouldBeAdded(){
+        Assertions.assertEquals(1,userService.findAll().size());
+        Users user = new Users();
+        user.setName("name");
+        user.setSurname("surname");
+        user.setUsername("username");
+        user.setPassword("password");
+        userService.add(user);
+        Assertions.assertEquals(2,userService.findAll().size());
     }
 
     @AfterEach
